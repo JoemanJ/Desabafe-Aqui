@@ -25,14 +25,12 @@ class UserProfile(models.Model):
     picture = models.ImageField("User's profile picture",
                                 upload_to=user_profile_picture_path,
                                 blank=True,
-                                db_comment="User's profile picture",
                                 help_text="A imagem que aparece junto com seus posts",
                                 )
     bio = models.TextField("User's biography",
                            blank=True,
                            max_length=1000,
-                           help_text="Escreva um pouco sobre você",
-                           db_comment="User's biografy")
+                           help_text="Escreva um pouco sobre você")
     
     def __str__(self):
         return f"{self.user.username}'s (id: {self.user.pk}) profile"
@@ -47,30 +45,26 @@ class Post(models.Model):
     A post made by a user.
     """
     author = models.ForeignKey(User, 
-                             verbose_name=("The user that made the post"), 
-                             on_delete=models.CASCADE,
-                             )
+                               verbose_name=("The user that made the post"), 
+                               related_name="posts",
+                               on_delete=models.CASCADE)
     
     text = models.TextField("The text of the post",
                             max_length=5000,
                             null=False, blank=False,
-                            help_text="Escreva aqui o que você quer desabafar",
-                            db_comment="The text of the post")
+                            help_text="Escreva aqui o que você quer desabafar")
     
     created_at = models.DateTimeField("Date the post was published",
                                           auto_now_add=True,
-                                          help_text="Data de criação do desabafo",
-                                          db_comment="Date the post was published")
+                                          help_text="Data de criação do desabafo")
     
     updated_at = models.DateTimeField("Date the post was last edited",
                                        auto_now=True,
-                                       help_text="Data da última edição do desabafo",
-                                       db_comment="Date the post was last edited")
+                                       help_text="Data da última edição do desabafo")
     
     slug = models.SlugField(max_length=8, 
                             unique=True, 
-                            blank=True,
-                            db_comment="Unique, random, small id for the post")
+                            blank=True)
 
     def __str__(self):
         return f"{self.author.username}: {self.text[:20]}..."
@@ -101,3 +95,32 @@ class Post(models.Model):
         verbose_name = "Post"
         verbose_name_plural = "Posts"
     
+class Comment(models.Model):
+    """
+    A comment made by a user in a post
+    """
+    author = models.ForeignKey(User, 
+                               verbose_name=("Author of the comment"), 
+                               related_name="comments",
+                               on_delete=models.CASCADE)
+    
+    post = models.ForeignKey(Post,
+                             verbose_name=("Post the comment was made on"),
+                             related_name="comments",
+                             on_delete=models.CASCADE)
+    
+    text = models.TextField("Text of the comment",
+                            max_length=500,
+                            null=False, blank=False,
+                            help_text="Escreva aqui o que você quer desabafar")
+    
+    created_at = models.DateTimeField("Date the comment was made",
+                                      auto_now_add=True,
+                                      help_text="Data de criação do comentário")
+    
+    updated_at = models.DateTimeField("Date the comment was last edited",
+                                       auto_now=True,
+                                       help_text="Data da última edição do comentário")
+    
+    def __str__(self):
+        return f"{self.author} on {self.post.slug}: {self.text[:20]}"
