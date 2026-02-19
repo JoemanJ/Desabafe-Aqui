@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 import secrets
 import string
 
+config = {
+    "POST_SLUG_SIZE": 8
+}
+
 def user_profile_picture_path(instance, filename) -> str:
     """ 
     Helper function to define the upload path  for user profile pictures.
@@ -37,7 +41,7 @@ class UserProfile(models.Model):
         ordering = ['user']
         verbose_name = "User profile"
         verbose_name_plural = "User profiles"
-    
+
 class Post(models.Model):
     """
     A post made by a user.
@@ -69,7 +73,7 @@ class Post(models.Model):
                             db_comment="Unique, random, small id for the post")
 
     def __str__(self):
-        return self.text
+        return f"{self.author.username}: {self.text[:20]}..."
     
     def save(self, *args, **kwargs):
         """
@@ -84,7 +88,7 @@ class Post(models.Model):
         Generates a unique 16-digit slug for the post
         """
         characters = string.ascii_letters + string.digits
-        new_slug = ''.join(secrets.choice(characters) for _ in range(8))
+        new_slug = ''.join(secrets.choice(characters) for _ in range(config["POST_SLUG_SIZE"]))
         
         # Guard against duplicate slugs
         if Post.objects.filter(slug=new_slug).exists():
