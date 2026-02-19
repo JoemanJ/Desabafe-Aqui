@@ -124,3 +124,7 @@ class Comment(models.Model):
     
     def __str__(self):
         return f"{self.author} on {self.post.slug}: {self.text[:20]}"
+    
+    class Meta:
+        ordering = ['created_at']
+        verbose_name = "Comment"
