@@ -31,7 +31,7 @@ class UserProfile(models.Model):
         return f"{self.user.username}'s (id: {self.user.pk}) profile"
     
 class Post(models.Model):
-    user = models.ForeignKey(User, 
+    author = models.ForeignKey(User, 
                              verbose_name=("The user that made the post"), 
                              on_delete=models.CASCADE,
                              )
@@ -42,13 +42,21 @@ class Post(models.Model):
                             help_text="Escreva aqui o que você quer desabafar",
                             db_comment="The text of the post")
     
-    published_date = models.DateTimeField("Date the post was published",
+    created_at = models.DateTimeField("Date the post was published",
                                           auto_now_add=True,
                                           help_text="Data de criação do desabafo",
                                           db_comment="Date the post was published")
     
-    last_edited = models.DateTimeField("Date the post was last edited",
+    updated_at = models.DateTimeField("Date the post was last edited",
                                        auto_now=True,
                                        help_text="Data da última edição do desabafo",
                                        db_comment="Date the post was last edited")
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
     
