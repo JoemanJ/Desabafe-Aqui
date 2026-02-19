@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class AppConfig(AppConfig):
-    name = 'perfis'
+    name = 'blog'
 
     def ready(self):
         import blog.signals
