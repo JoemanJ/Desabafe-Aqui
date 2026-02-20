@@ -113,7 +113,7 @@ class Comment(models.Model):
     text = models.TextField("Text of the comment",
                             max_length=500,
                             null=False, blank=False,
-                            help_text="Escreva aqui o que você quer desabafar")
+                            help_text="Escreva aqui o que você quer comentar")
     
     created_at = models.DateTimeField("Date the comment was made",
                                       auto_now_add=True,
