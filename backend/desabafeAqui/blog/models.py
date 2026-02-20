@@ -67,7 +67,7 @@ class Post(models.Model):
                             blank=True)
 
     def __str__(self):
-        end = '' if len(self.text) > 20 else '...'
+        end = '' if len(self.text) < 20 else '...'
         return f"{self.author.username}: {self.text[:20]}{end}"
     
     def save(self, *args, **kwargs):
@@ -124,7 +124,7 @@ class Comment(models.Model):
                                        help_text="Data da última edição do comentário")
     
     def __str__(self):
-        end = '' if len(self.text) > 20 else '...'
+        end = '' if len(self.text) < 20 else '...'
         return f"{self.author} on {self.post.slug}: {self.text[:20]}{end}"
     
     class Meta:
