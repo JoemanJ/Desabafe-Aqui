@@ -8,6 +8,8 @@ config = {
     "POST_SLUG_SIZE": 8
 }
 
+# TODO: Change "verbose_name" attributes to smaller names in portuguese
+
 def user_profile_picture_path(instance, filename) -> str:
     """ 
     Helper function to define the upload path  for user profile pictures.
