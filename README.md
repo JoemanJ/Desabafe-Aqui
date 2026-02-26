@@ -18,7 +18,7 @@ Até então o projeto incorpora:
 - Framework backend (Django)
 - Framework frontend (Angular)
 - Comunicação com base de dados (SQlite)
-- Autenticação de usuário
+- Autenticação de usuário (JWT)
 - Operações CRUD
 - API REST
 - Modelo MVC
@@ -37,16 +37,19 @@ Meu plano é ir adicionando novas funcionalidades ou melhorando funcionalidades 
 Algumas funcionalidades planejadas:
 - Feed com scrolling infinito
 - Possibilidade de posts com imagem
+- Possibilidade de dar "likes" em posts e comentários
+- Possibilidade de comentar em outros comentários
 - Funcionalidades de administrador
 - Tags para posts
 
 ## Quais as tecnologias usadas?
-O backend é feito usando [Django](https://www.djangoproject.com/) e a [Django Rest Framework](https://www.django-rest-framework.org/), e o frontend é feito usando [Angular](https://angular.dev/). A aplicação é desacoplada, ou seja, frontend e backend rodam em servidores distintos.
+O backend é feito usando [Django](https://www.djangoproject.com/) e a [Django Rest Framework](https://www.django-rest-framework.org/), e o frontend é feito usando [Angular](https://angular.dev/). A aplicação é desacoplada, ou seja, frontend e backend rodam em servidores distintos. A autenticação é feita usando SimpleJWT.
 
 versões:
 - Django: 6.0.2
 - Angular: 21.1.4
 - Django REST Framework: [TODO: preencher isso]
+- DRF SimpleJWT
 
 # (English section starts here)
-[TODO: finish this...]
+[#TODO: finish this...]
