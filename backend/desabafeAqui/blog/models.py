@@ -132,3 +132,5 @@ class Comment(models.Model):
     class Meta:
         ordering = ['created_at']
         verbose_name = "Comment"
+
+# TODO: Create a "like" model 

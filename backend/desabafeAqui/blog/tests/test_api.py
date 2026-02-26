@@ -1,4 +1,5 @@
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from . import createTestUser
 from ..models import Post, Comment
@@ -49,7 +50,28 @@ class PostAPITest(APITestCase):
         self.assertEqual(Post.objects.count(), 2)
         self.assertEqual(Post.objects.last().author, self.user)
 
-    #TODO: write tests for the other actions
+    def test_user_cant_delete_another_users_post(self):
+        """
+        Checks that a user can't delete another user's post
+        """
+        hacker = User.objects.create(username='hackerman', password='123212321')
+        self.client.force_login(user=hacker)
+
+        response = self.client.delete(self.detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        # Post is still there
+        self.assertEqual(Post.objects.count(), 1)
+
+    def test_user_can_delete_their_own_post(self):
+        """
+        Checks that a user can delete their own post
+        """
+        self.client.force_login(self.user)
+
+        response = self.client.delete(self.detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 class CommentAPITest(APITestCase):
     def setUp(self):
@@ -96,4 +118,25 @@ class CommentAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Comment.objects.count(), 2)
 
-    #TODO: write tests for the other actions
+    def test_user_cant_delete_another_users_comment(self):
+        """
+        Checks that a user can't delete another user's comment
+        """
+        hacker = User.objects.create(username='hackerman', password='123212321')
+        self.client.force_login(user=hacker)
+
+        response = self.client.delete(self.detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        # comment is still there
+        self.assertEqual(Comment.objects.count(), 1)
+
+    def test_user_can_delete_their_own_comment(self):
+        """
+        Checks that a user can delete their own comment
+        """
+        self.client.force_login(self.user)
+
+        response = self.client.delete(self.detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
