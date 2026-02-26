@@ -41,7 +41,7 @@ class PostAPITest(APITestCase):
         """
         Checks that a POST on the posts api can create a new post
         """
-        self.client.force_login(user=self.user)
+        self.client.force_authenticate(user=self.user)
 
         new_post_data = {"text": "New post"}
         response = self.client.post(self.list_url, new_post_data, format='json')
@@ -55,7 +55,7 @@ class PostAPITest(APITestCase):
         Checks that a user can't delete another user's post
         """
         hacker = User.objects.create(username='hackerman', password='123212321')
-        self.client.force_login(user=hacker)
+        self.client.force_authenticate(user=hacker)
 
         response = self.client.delete(self.detail_url)
 
@@ -67,7 +67,7 @@ class PostAPITest(APITestCase):
         """
         Checks that a user can delete their own post
         """
-        self.client.force_login(self.user)
+        self.client.force_authenticate(self.user)
 
         response = self.client.delete(self.detail_url)
 
@@ -109,7 +109,7 @@ class CommentAPITest(APITestCase):
         """
         Checks that a POST on the comments api can create a new comment
         """
-        self.client.force_login(user=self.user)
+        self.client.force_authenticate(user=self.user)
 
         new_comment_data = {"post": self.post.slug,
                             "text": "New comment"}
@@ -123,7 +123,7 @@ class CommentAPITest(APITestCase):
         Checks that a user can't delete another user's comment
         """
         hacker = User.objects.create(username='hackerman', password='123212321')
-        self.client.force_login(user=hacker)
+        self.client.force_authenticate(user=hacker)
 
         response = self.client.delete(self.detail_url)
 
@@ -135,7 +135,7 @@ class CommentAPITest(APITestCase):
         """
         Checks that a user can delete their own comment
         """
-        self.client.force_login(self.user)
+        self.client.force_authenticate(self.user)
 
         response = self.client.delete(self.detail_url)
 
