@@ -1,0 +1,22 @@
+$login_exit_button_color: #16a34a;
+
+:host{
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.user-profile-picture{
+    margin: 5px;
+    height: 50px;
+}
+
+.login-button{
+    height: fit-content;
+    background-color: $login_exit_button_color;
+    padding: 2px 10px;
+    margin: 5px;
+    border-radius: 99999px;
+    font-size: large;
+    text-align: center;
+}

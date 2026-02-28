@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+$background_dark: #0f0f14;
+
+$text_color: white;
+$text_link_color: #FFF;
+$text_link_hover_color: #EEE;
+$text_link_active_color: #AAA;
+
+$header_text_font_family: "Bree Serif", serif;
+
+*{
+    color: $text_color;
+}
+
+body {
+    background-color: $background_dark;
+    color: $text_color;
+    margin: 0;
+}
+
+.header-font {
+    font-family: $header_text_font_family;
+    font-weight: 400;
+    font-style: normal;
+}
+
+// Links should look slightly different from plain text, but not aberrant
+.plain-link {
+    color: $text_link_color;
+    text-decoration: none;
+
+    &:visited{
+        color: $text_link_color;
+    }
+    &:hover{
+        color: $text_link_hover_color;
+    }
+    &:active{
+        color: $text_link_active_color;
+    }
+    
+}

@@ -1,0 +1,27 @@
+$header_background_color: #8b5cf6;
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    padding: 5px 10px;
+    background-color: $header_background_color;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    position: sticky;
+    top: 0;
+}
+
+.logo{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.profile-section{
+    position: absolute;
+    right: 2%;
+}
