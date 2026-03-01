@@ -1,42 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
-$background_dark: #0f0f14;
-
-$text_color: white;
-$text_link_color: #FFF;
-$text_link_hover_color: #EEE;
-$text_link_active_color: #AAA;
-
-$header_text_font_family: "Bree Serif", serif;
-
-*{
-    color: $text_color;
-}
+@use 'colors';
+@use 'fonts';
 
 body {
-    background-color: $background_dark;
-    color: $text_color;
+    background-color: colors.$background_dark;
+    color: colors.$text;
     margin: 0;
-}
-
-.header-font {
-    font-family: $header_text_font_family;
-    font-weight: 400;
-    font-style: normal;
 }
 
 // Links should look slightly different from plain text, but not aberrant
 .plain-link {
-    color: $text_link_color;
+    color: colors.$text_link;
     text-decoration: none;
 
     &:visited{
-        color: $text_link_color;
+        color: colors.$text_link;
     }
     &:hover{
-        color: $text_link_hover_color;
+        color: colors.$text_link_hover;
     }
     &:active{
-        color: $text_link_active_color;
+        color: colors.$text_link_active;
     }
     
+}
+
+.rounded-button{
+    color: white;
+    height: fit-content;
+    background-color: colors.$theme_green_dark;
+    padding: 2px 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 99999px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover{
+        filter: brightness(0.95);
+    }
 }

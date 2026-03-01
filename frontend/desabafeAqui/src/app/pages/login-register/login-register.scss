@@ -1,0 +1,61 @@
+@use "colors";
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    margin-top: 50px;
+}
+
+.text-input{
+    color: black;
+    text-align: center;
+    margin: 0px 50px;
+    padding: 5px;
+    border: none;
+    border-radius: 999999px;
+}
+
+.bubble-container{
+    width: 30vw;
+    height: 500px;
+}
+
+.login{
+    background-color: colors.$theme_green;
+    .text-input{
+        background-color: colors.$theme_green_light;
+    }
+    .rounded-button{
+        background-color: colors.$theme_purple;
+    }
+    border-radius: 0px 50px 50px 50px;
+}
+
+.register{
+    background-color: colors.$theme_purple;
+    .text-input{
+        background-color: colors.$theme_purple_light;
+    }
+    border-radius: 50px 50px 0px 50px;
+}
+
+.bubble{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    height: 100%;
+    *{
+        scale: 2;
+    }
+}
+
+button{
+    padding: 5px 15px;
+    font-size: medium;
+    font-weight: 800;
+}

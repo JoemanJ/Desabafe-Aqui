@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-login-or-profile',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './login-or-profile.html',
   styleUrl: './login-or-profile.scss',
 })

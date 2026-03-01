@@ -1,0 +1,15 @@
+$header_text_font_family: "Bree Serif", serif;
+$standart_text_font_family: "Mulish", sans-serif;
+
+.standart-font {
+    font-family: $standart_text_font_family;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.header-font {
+    font-family: $header_text_font_family;
+    font-weight: 400;
+    font-style: normal;
+}

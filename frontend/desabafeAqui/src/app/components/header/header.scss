@@ -1,4 +1,5 @@
-$header_background_color: #8b5cf6;
+@use "colors";
+$header_background_color: colors.$theme_purple;
 
 *{
     margin: 0;
@@ -6,6 +7,7 @@ $header_background_color: #8b5cf6;
 }
 
 header{
+    z-index: 99999;
     padding: 5px 10px;
     background-color: $header_background_color;
     display: flex;

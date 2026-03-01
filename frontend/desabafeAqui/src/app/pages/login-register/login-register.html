@@ -1,0 +1,19 @@
+<div class="bubble-container">
+    <div class="login bubble">
+        <h3 class="standart-font">Olá de novo!</h3>
+        <input type="text" placeholder="Usuário" class="text-input" #login_user_field>
+        <input type="text" placeholder="Senha" class="text-input" #login_password_field>
+        <button (click)="login(login_user_field.value)" class="rounded-button standart-font">Entrar</button>
+        <!-- TODO: link (and page) to recover account" -->
+    </div>
+</div>
+<div class="bubble-container">
+    <div class="register bubble">
+        <h3 class="standart-font">Primeira vez?</h3>
+        <input type="text" placeholder="Usuário" class="text-input" #register_user_field>
+        <input type="text" placeholder="email" class="text-input" #register_email_field>
+        <input type="text" placeholder="Senha" class="text-input" #register_password_field>
+        <input type="text" placeholder="Confirmar senha" class="text-input" #register_confirm_password_field>
+        <button class="rounded-button standart-font">Registrar</button>
+    </div>
+</div>

@@ -2,5 +2,5 @@
     <img src="blank_user.png" class="user-profile-picture">
     <button class="login-button header-font" (click)="toggleLoggedIn()">sair</button>
 }@else {
-    <button class="login-button header-font" (click)="toggleLoggedIn()">login</button>
+    <button class="rounded-button header-font" [routerLink]="['/login']">login</button>
 }
