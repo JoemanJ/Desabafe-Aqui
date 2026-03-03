@@ -27,11 +27,9 @@ from drf_spectacular.views import (SpectacularAPIView,
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('blog.urls')),
-    
-    # JWT
-    path('api/token', TokenObtainPairView.as_view(), name='token-obtain-pair'),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token-refresh'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token-obtain-pair'),
+    path('api/', include('blog.urls')),    
 
     # API documentation
     path('api/schema', SpectacularAPIView.as_view(), name='schema'),

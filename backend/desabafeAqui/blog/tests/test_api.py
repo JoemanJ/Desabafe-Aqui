@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 from . import createTestUser
-from ..models import Post, Comment
+from ..models import Post, Comment, UserProfile
 
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -140,3 +140,79 @@ class CommentAPITest(APITestCase):
         response = self.client.delete(self.detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+class ProfileAPITest(APITestCase):
+    def setUp(self):
+        self.user = createTestUser()
+        self.profile = self.user.profile
+        self.profile.bio = "Test profile bio"
+        self.profile.save()
+        self.list_url = reverse('profile-list')
+        self.detail_url = reverse('profile-detail', 
+                                  kwargs={'user__username': self.user.username})
+
+    def test_get_profiles_list_returns_OK(self):
+        """
+        Checks that a GET on the profiles list returns 200 OK
+        """
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_profiles_list_returns_registered_profile(self):
+        """
+        Checks that a GET on the profiles list returns the test profile
+        """
+        response = self.client.get(self.list_url)
+        self.assertContains(response, "Test profile")
+
+    def test_get_profiles_detail_returns_registered_profile(self):
+        """
+        Checks that a GET on a specific profile returns the test profile
+        """
+        response = self.client.get(self.detail_url)
+        self.assertContains(response, "Test profile")
+
+    def test_user_cannot_delete_a_profile(self):
+        """
+        Checks that a user cannot delete their own profile
+        TODO: Refactor this into more tests so check that no one can delete any
+        profile
+        """
+        self.client.force_authenticate(self.user)
+
+        response = self.client.delete(self.detail_url)
+
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+        # profile is still there
+        self.assertEqual(UserProfile.objects.count(), 1)
+
+class MiniProfileAPITest(APITestCase):
+    def setUp(self):
+        self.user = createTestUser()
+        self.profile = self.user.profile
+        self.profile.bio = "Test profile bio"
+        self.profile.save()
+        self.list_url = reverse('miniprofile-list')
+        self.detail_url = reverse('miniprofile-detail', 
+                                  kwargs={'user__username': self.user.username})
+
+    def test_get_mini_profiles_list_returns_OK(self):
+        """
+        Checks that a GET on the miniprofiles list returns 200 OK
+        """
+        response = self.client.get(self.list_url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_mini_profiles_list_returns_registered_profile(self):
+        """
+        Checks that a GET on the mini_profiles list returns the test profile
+        """
+        response = self.client.get(self.list_url)
+        self.assertContains(response, self.user.username)
+
+    def test_get_mini_profile_detail_returns_registered_profile(self):
+        """
+        Checks that a GET on a specific mini profile returns the test profile
+        """
+        response = self.client.get(self.detail_url)
+        self.assertContains(response, self.user.username)

@@ -1,6 +1,11 @@
-from rest_framework import viewsets, permissions
-from .models import Post, Comment
-from .serializers import PostSerializer, CommentSerializer
+from rest_framework import viewsets, permissions, mixins
+from .models import (Post, 
+                     Comment, 
+                     UserProfile)
+from .serializers import (PostSerializer,
+                          CommentSerializer, 
+                          UserProfileSerializer,
+                          UserProfileMiniSerializer)
 from .permissions import IsOwnerOrReadOnly
 
 # Create your views here.
@@ -40,3 +45,37 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+class ProfileViewSet(mixins.CreateModelMixin,
+                     mixins.ListModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin,
+                     viewsets.GenericViewSet):
+    """
+    Provides automatic actions for:
+    list (GET)
+    retrieve (GET single profile)
+    update (PATCH)
+    """
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    lookup_field = 'user__username'
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+class ProfileMiniViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Provides automatic actions for:
+    list (GET)
+    create (POST)
+    retrieve (GET single MiniProfile (username and profile picture only))
+    update (PUT/PATCH)
+    destroy (DELETE)
+    """
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileMiniSerializer
+
+    lookup_field = 'user__username'
+
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
