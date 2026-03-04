@@ -1,0 +1,61 @@
+@use "colors";
+
+:host{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.make-post-section{
+    display: flex;
+    flex-direction: column;
+    width: 12vw;
+}
+
+.post-greeting{
+
+    text-wrap: wrap;
+}
+
+.post-text-container{
+    background-color: colors.$theme_green;
+    justify-content: center;
+    display: flex;
+    padding: 15px;
+    border-radius: 0px 50px 50px 50px;
+
+}
+
+.post-text{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow-y: scroll;
+    min-height: 300px;
+}
+
+.rounded-button{
+    width: fit-content;
+    align-self: flex-end;
+}
+
+.feed-section{
+    // border: 1px white solid;
+    
+    width: 60vw;
+    height: 85vh;
+    display: flex;
+    justify-content: space-between;
+
+    padding: 15px;
+    gap: 15px;
+    overflow-y: scroll;
+}
+
+.feed-column{
+    width: 24%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

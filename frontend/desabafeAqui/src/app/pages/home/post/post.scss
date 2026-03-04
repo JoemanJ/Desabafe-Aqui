@@ -1,0 +1,30 @@
+@use "colors";
+
+:host{
+    display: flex;
+    flex-direction: column;
+    background-color: colors.$theme_purple;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    border-radius: 50px 50px 0px 50px;
+    width: 100%;
+    max-height: 300px;
+}
+
+.mini-profile{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+img {
+    height: 40px;
+}
+
+.text {
+    margin: 0px 0px 20px 0px;
+    text-wrap-mode: wrap;
+    word-wrap: break-word;
+    width: 100%;
+    overflow-y: scroll;
+}

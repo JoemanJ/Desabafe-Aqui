@@ -1,4 +1,4 @@
-export interface UserProfile {
+export interface UserMiniProfileModel {
     username: string;
     bio: string;
     avatar_url?: string

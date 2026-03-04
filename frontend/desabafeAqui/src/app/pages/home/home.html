@@ -1,0 +1,21 @@
+<div>
+    <div class="make-post-section">
+        <h3 class="post-greeting standart-font">Como se sente, @user11111?</h3>
+        <div class="post-text-container">
+            <textarea class="post-text standart-font" placeholder="Escreva aqui..."></textarea>
+        </div>
+        <button class="rounded-button standart-font">postar</button>
+    </div>
+
+</div>
+<div class="feed-section">
+    @for (col of feed_columns; track $index) {
+        <div class="feed-column">
+            @for (post of col; track $index) {
+                <app-post [username]="post.author_details.username"
+                [user_profile_picture]="post.author_details.picture"
+                [text]="post.text"></app-post>
+        }
+        </div>
+    }
+</div>
