@@ -1,7 +1,7 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../core/services/auth';
 import { Router } from '@angular/router';
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-register',
@@ -28,18 +28,27 @@ export class LoginRegister {
     });
   }
 
-
-
-  saveCredentials(res: any){
+  private saveCredentials(res: any){
     localStorage.setItem("access_token", res.access);
     localStorage.setItem("refresh_token", res.refresh);
     localStorage.setItem("username", res.username);
   }
 
-  handleLoginError(res: any){
-    this.loginErrorMessage.set('Usuário ou senha inválidos')
-    console.log(this.loginErrorMessage)
-  
+  private handleLoginError(res: HttpErrorResponse){
+    this.loginErrorMessage.set(this.errorMessageForStatusCode(res.status));
+  }
+
+  private errorMessageForStatusCode(status: number){
+    switch (status){
+      case 0:
+        return 'Não foi possível conectar ao servidor backend.';
+      case 400:
+        return "Email ou nome de usuário já cadastrado.";
+      case 401:
+        return 'Usuário ou senha inválidos.';
+      default:
+        return 'Um erro inesperado aconteceu. Tente novamente.';
+    }
   }
 
   register(username: string, email: string, password: string, confirm_password: string): void {
@@ -52,14 +61,14 @@ export class LoginRegister {
 
     this.authService.register(new_user_data).subscribe({
       next: (res: any) => {
-        this.login(username, password)
+        this.login(username, password);
+
       },
       error: this.handleRegisterError
     })
   }
 
-  handleRegisterError(res: any){
-    console.log("Error: ", res)
-        this.registerErrorMessage.set('Algo deu errado no registro')
+  private handleRegisterError(res: HttpErrorResponse){
+    this.registerErrorMessage.set(this.errorMessageForStatusCode(res.status))
   }
 }
