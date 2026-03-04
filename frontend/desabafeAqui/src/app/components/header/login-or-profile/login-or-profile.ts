@@ -18,6 +18,6 @@ export class LoginOrProfile {
   }
 
   logout(): void{
-    this.authService.updateAuthState(false);
+    this.authService.logout();
   }
 }

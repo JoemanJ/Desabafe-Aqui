@@ -29,6 +29,13 @@ export class AuthService {
     return this.httpClient.post(this.LOGIN_URL, credentials);
   }
 
+  logout(): void{
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('username');
+    this.updateAuthState(false);
+  }
+
   register(credentials: RegisterCredentials){
     return this.httpClient.post(this.REGISTER_URL, credentials)
   }
