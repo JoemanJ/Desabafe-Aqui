@@ -1,5 +1,6 @@
 doodles.xopp
 backend/venv
 backend/desabafeAqui/profile_pictures
+.vscode/
 *.sqlite3
 *.pyc
