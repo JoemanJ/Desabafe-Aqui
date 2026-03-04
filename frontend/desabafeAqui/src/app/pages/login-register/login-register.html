@@ -5,7 +5,7 @@
         <h3 class="standart-font">Olá de novo!</h3>
         <input type="text" placeholder="Usuário" class="text-input" #login_user_field>
         <input type="password" placeholder="Senha" class="text-input" #login_password_field>
-        <button (click)="login(login_user_field.value, login_password_field.value)" class="rounded-button standart-font">Entrar</button>
+        <app-rounded-button (click)="login(login_user_field.value, login_password_field.value)" class="rounded-button standart-font">Entrar</app-rounded-button>
         @if(loginErrorMessage()) {
             <p class="error-message standart-font">{{loginErrorMessage()}}</p>
         }
@@ -19,11 +19,11 @@
         <input type="text" placeholder="Email" class="text-input" #register_email_field>
         <input type="password" placeholder="Senha" class="text-input" #register_password_field>
         <input type="password" placeholder="Confirmar senha" class="text-input" #register_confirm_password_field>
-        <button class="rounded-button standart-font" (click)="register(register_user_field.value,
+        <app-rounded-button (click)="register(register_user_field.value,
                                                                        register_email_field.value,
                                                                        register_password_field.value,
                                                                        register_confirm_password_field.value
-        )">Registrar</button>
+        )">Registrar</app-rounded-button>
         @if(registerErrorMessage()) {
             <p class="error-message standart-font">{{registerErrorMessage()}}</p>
         }

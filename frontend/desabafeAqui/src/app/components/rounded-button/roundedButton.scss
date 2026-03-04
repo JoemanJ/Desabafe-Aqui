@@ -1,0 +1,21 @@
+@use "colors";
+@use "fonts";
+
+:host{
+    font-family: fonts.$standart_text_font_family;
+    font-weight: bold;
+    color: white;
+    height: fit-content;
+    background-color: colors.$theme_green_dark;
+    padding: 2px 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 99999px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover{
+        filter: brightness(0.95);
+    }
+}

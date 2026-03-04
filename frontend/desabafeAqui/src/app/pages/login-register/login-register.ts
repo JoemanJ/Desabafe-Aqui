@@ -2,10 +2,11 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../core/services/auth';
 import { Router } from '@angular/router';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { RoundedButton } from "../../components/rounded-button/roundedButton";
 
 @Component({
   selector: 'app-login-register',
-  imports: [],
+  imports: [RoundedButton],
   templateUrl: './login-register.html',
   styleUrl: './login-register.scss',
 })
@@ -22,6 +23,7 @@ export class LoginRegister {
     this.authService.login(user_data).subscribe({
       next: (res) => {
         this.saveCredentials(res);
+        this.authService.updateAuthState(true);
         this.router.navigate(['/']);
       },
       error: this.handleLoginError

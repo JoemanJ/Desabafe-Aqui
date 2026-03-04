@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 interface RegisterCredentials {
     username: string;
@@ -17,9 +18,12 @@ interface LoginCredentials {
   providedIn: 'root',
 })
 export class AuthService {
-  private httpClient = inject(HttpClient);
   private readonly LOGIN_URL = 'http://127.0.0.1:8000/api/token/'
   private readonly REGISTER_URL = 'http://127.0.0.1:8000/api/register/'
+  
+  private httpClient = inject(HttpClient);
+  private LoggedIn$ = new BehaviorSubject<boolean>(this.hasToken());
+  isLoggedIn = this.LoggedIn$.asObservable();
 
   login(credentials: LoginCredentials){
     return this.httpClient.post(this.LOGIN_URL, credentials);
@@ -27,5 +31,13 @@ export class AuthService {
 
   register(credentials: RegisterCredentials){
     return this.httpClient.post(this.REGISTER_URL, credentials)
+  }
+
+  private hasToken(): boolean{
+    return !!localStorage.getItem('access_token');
+  }
+
+  updateAuthState(status: boolean): void{
+    this.LoggedIn$.next(status)
   }
 }

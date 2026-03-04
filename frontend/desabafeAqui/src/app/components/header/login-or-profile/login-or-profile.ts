@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '../../../core/services/auth';
+import { RoundedButton } from '../../rounded-button/roundedButton';
 
 @Component({
   selector: 'app-login-or-profile',
-  imports: [RouterLink],
+  imports: [RouterLink, RoundedButton],
   templateUrl: './login-or-profile.html',
   styleUrl: './login-or-profile.scss',
 })
 export class LoginOrProfile {
-  isLoggedIn: boolean = false;
+  private authService = inject(AuthService);
+  isLoggedIn = true;
 
-  toggleLoggedIn() {
-    this.isLoggedIn = !this.isLoggedIn;
-    console.log(this.isLoggedIn);
+  constructor(){
+    this.authService.isLoggedIn.subscribe((status) => this.isLoggedIn = status);
+  }
+
+  logout(): void{
+    this.authService.updateAuthState(false);
   }
 }

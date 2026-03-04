@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { LoginOrProfile } from './login-or-profile/login-or-profile';
 
 @Component({
@@ -8,13 +8,4 @@ import { LoginOrProfile } from './login-or-profile/login-or-profile';
   styleUrl: './header.scss',
 })
 export class Header {
-  omitLoginProfile = false;
-
-  hideLoginProfile(): void{
-    this.omitLoginProfile = false;
-  }
-
-  showLoginProfile(): void{
-    this.omitLoginProfile = true;
-  }
 }

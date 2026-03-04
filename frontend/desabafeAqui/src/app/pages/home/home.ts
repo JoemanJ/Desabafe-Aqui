@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PostModel } from '../../core/models/post.model';
 import { Post } from './post/post';
+import { RoundedButton } from "../../components/rounded-button/roundedButton";
 
 @Component({
   selector: 'app-home',
-  imports: [Post],
+  imports: [Post, RoundedButton],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
