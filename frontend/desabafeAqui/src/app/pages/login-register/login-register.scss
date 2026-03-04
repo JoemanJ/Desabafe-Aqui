@@ -49,6 +49,7 @@
     justify-content: center;
     gap: 50px;
     height: 100%;
+    width: 80%;
     *{
         scale: 2;
     }
@@ -61,5 +62,8 @@ app-rounded-button{
 }
 
 .error-message{
+    text-align: center;
     color: red;
+    text-wrap: wrap;
+    width: 200px;
 }

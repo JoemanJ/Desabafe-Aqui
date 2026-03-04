@@ -26,7 +26,7 @@ export class LoginRegister {
         this.authService.updateAuthState(true);
         this.router.navigate(['/']);
       },
-      error: this.handleLoginError
+      error: (res) => this.handleLoginError(res)
     });
   }
 
@@ -66,7 +66,7 @@ export class LoginRegister {
         this.login(username, password);
 
       },
-      error: this.handleRegisterError
+      error: (res) => this.handleRegisterError(res)
     })
   }
 
