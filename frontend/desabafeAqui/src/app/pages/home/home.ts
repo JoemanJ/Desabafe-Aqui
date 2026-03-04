@@ -23,8 +23,6 @@ export class Home {
     [this.test_post, this.test_post, this.test_post],
     [this.test_post, this.test_post, this.test_post],
     [this.test_post, this.test_post, this.test_post],
-    [this.test_post, this.test_post, this.test_post]
+    [this.test_post, this.test_post, this.test_post] 
   ]
-
-
 }

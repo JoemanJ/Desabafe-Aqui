@@ -1,5 +1,7 @@
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { AuthService } from '../../core/services/auth';
+import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-register',
@@ -9,6 +11,8 @@ import { AuthService } from '../../core/services/auth';
 })
 export class LoginRegister {
   private authService = inject(AuthService)
+  private router = inject(Router)
+
   loginErrorMessage: WritableSignal<string> = signal('');
   registerErrorMessage: WritableSignal<string> = signal('');
 
@@ -16,16 +20,26 @@ export class LoginRegister {
     const user_data = {username: username, password: password}
 
     this.authService.login(user_data).subscribe({
-      next: (res: any) => {
-        localStorage.setItem("access_token", res.access);
-        localStorage.setItem("refresh_token", res.refresh);
-        localStorage.setItem("username", res.username);
+      next: (res) => {
+        this.saveCredentials(res);
+        this.router.navigate(['/']);
       },
-      error: (res) => {
-        this.loginErrorMessage.set('Usuário ou senha inválidos')
-        console.log(this.loginErrorMessage)
-      }
+      error: this.handleLoginError
     });
+  }
+
+
+
+  saveCredentials(res: any){
+    localStorage.setItem("access_token", res.access);
+    localStorage.setItem("refresh_token", res.refresh);
+    localStorage.setItem("username", res.username);
+  }
+
+  handleLoginError(res: any){
+    this.loginErrorMessage.set('Usuário ou senha inválidos')
+    console.log(this.loginErrorMessage)
+  
   }
 
   register(username: string, email: string, password: string, confirm_password: string): void {
@@ -38,14 +52,14 @@ export class LoginRegister {
 
     this.authService.register(new_user_data).subscribe({
       next: (res: any) => {
-        console.log("Usuário registrado:", username);
         this.login(username, password)
       },
-
-      error: (res) => {
-        console.log("Error: ", res)
-        this.registerErrorMessage.set('Algo deu errado no registro')
-      }
+      error: this.handleRegisterError
     })
+  }
+
+  handleRegisterError(res: any){
+    console.log("Error: ", res)
+        this.registerErrorMessage.set('Algo deu errado no registro')
   }
 }
