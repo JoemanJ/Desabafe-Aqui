@@ -25,12 +25,14 @@ from drf_spectacular.views import (SpectacularAPIView,
                                    SpectacularSwaggerView, 
                                    SpectacularRedocView)
 
-from .auth.views import MyTokenObtainPairView
+from .auth.views import (MyTokenObtainPairView, 
+                         RegisterView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/refresh', TokenRefreshView.as_view(), name='token-refresh'),
     path('api/token/', MyTokenObtainPairView.as_view(), name='token-obtain-pair'),
+    path('api/register', RegisterView.as_view(), name='auth-register'),
     path('api/', include('blog.urls')),    
 
     # API documentation

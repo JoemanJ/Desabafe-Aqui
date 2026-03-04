@@ -30,6 +30,7 @@ class JWTTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('access', response.data)
         self.assertIn('refresh', response.data)
+        self.assertIn('username', response.data)
 
     def test_user_cant_get_JWT_from_API_with_wrong_credentials(self):
         """
@@ -47,3 +48,27 @@ class JWTTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertNotIn('access', response.data)
         self.assertNotIn('refresh', response.data)
+
+class RegisterUserTest(TestCase):
+    def setUp(self):
+        self.register_url = reverse('auth-register')
+
+        self.user = User.objects.create_user(username='testUser',
+                                             email='test@user.com',
+                                             password='testPassword')
+
+    def test_can_create_new_user_with_valid_credentials(self):
+        """
+        Checks that a new user can be registered with right credentials
+        """
+        new_user_data = {
+            'username': 'newUser',
+            'password': 'testPassword',
+            'email': 'new@email.com'
+        }
+        response = self.client.post(self.register_url, new_user_data)
+
+        if response.status_code != 201:
+            print(response)
+
+        self.assertEqual(User.objects.count(), 2)
