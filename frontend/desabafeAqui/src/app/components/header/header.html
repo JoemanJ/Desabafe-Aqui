@@ -2,7 +2,9 @@
     <div class="logo">
         <a class="plain-link header-font" href="/"><h1>Desabafe Aqui</h1></a>
     </div>
-    <div class="profile-section">
-        <app-login-or-profile></app-login-or-profile>
-    </div>
+    @if (showLoginProfileSection) {
+        <div class="profile-section">
+            <app-login-or-profile></app-login-or-profile>
+        </div>
+    }
 </header>
