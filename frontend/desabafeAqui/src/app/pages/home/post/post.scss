@@ -1,14 +1,20 @@
 @use "colors";
 
-:host{
+.post{
     display: flex;
     flex-direction: column;
-    background-color: colors.$theme_purple;
     box-sizing: border-box;
     padding: 10px 10px;
+    background-color: colors.$theme_purple;
     border-radius: 50px 50px 0px 50px;
     width: 100%;
     max-height: 300px;
+}
+
+.own {
+    color: black;
+    background-color: colors.$theme_green;
+    border-radius: 0px 50px 50px 50px;
 }
 
 .mini-profile{

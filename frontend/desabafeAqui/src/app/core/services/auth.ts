@@ -54,4 +54,8 @@ export class AuthService {
   getUsername(): string | null {
     return localStorage.getItem('username');
   }
+
+  updateUsername(username: string){
+    this.username$.next(username);
+  }
 }

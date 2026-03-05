@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Router, ɵEmptyOutletComponent } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rounded-button',
-  imports: [ɵEmptyOutletComponent],
+  imports: [],
   templateUrl: './roundedButton.html',
   styleUrl: './roundedButton.scss',
 })

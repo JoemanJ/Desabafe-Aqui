@@ -34,6 +34,7 @@ export class LoginRegister {
     localStorage.setItem("access_token", res.access);
     localStorage.setItem("refresh_token", res.refresh);
     localStorage.setItem("username", res.username);
+    this.authService.updateUsername(res.username);
   }
 
   private handleLoginError(res: HttpErrorResponse){
