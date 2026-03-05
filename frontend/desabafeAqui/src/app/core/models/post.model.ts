@@ -7,3 +7,7 @@ export interface PostModel{
         picture: string;
     }
 }
+
+export interface PostCreationModel{
+    text: string
+}

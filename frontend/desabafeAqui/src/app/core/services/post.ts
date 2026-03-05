@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { PostModel } from '../models/post.model';
+import { PostCreationModel, PostModel } from '../models/post.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,5 +12,9 @@ export class PostService {
 
   getPosts(): Observable<PostModel[]> {
     return this.httpClient.get<PostModel[]>(this.API_URL);
+  }
+
+  makeNewPost(post: PostCreationModel){
+    return this.httpClient.post(this.API_URL, post);
   }
 }

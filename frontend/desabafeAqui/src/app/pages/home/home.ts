@@ -1,8 +1,9 @@
-import { Component, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { PostModel } from '../../core/models/post.model';
+import { Component, inject, OnInit, Signal, signal, WritableSignal, ɵgetUnknownPropertyStrictMode } from '@angular/core';
+import { PostCreationModel, PostModel } from '../../core/models/post.model';
 import { Post } from './post/post';
 import { RoundedButton } from "../../components/rounded-button/roundedButton";
 import { PostService } from '../../core/services/post';
+import { AuthService } from '../../core/services/auth';
 
 @Component({
   selector: 'app-home',
@@ -12,16 +13,28 @@ import { PostService } from '../../core/services/post';
 })
 export class Home implements OnInit{
   postService = inject(PostService)
-  
+  authService = inject(AuthService)
+
+  username: string | null = null;
+
   posts: PostModel[] = [];
 
   feed_columns: WritableSignal<PostModel[][]> = signal([[],[],[],[]]);
+
+  constructor(){
+    this.authService.username.subscribe((username) => this.username = username);
+  }
+
   ngOnInit(): void {
+    this.username = this.authService.getUsername();
+    this.fetchPosts();
+  }
+
+  private fetchPosts(): void{
     this.postService.getPosts().subscribe({
       next: (data) =>{
         this.posts = data;
         this.arrangePosts();
-        console.log(this.feed_columns());
       },
       error: (err) => console.log("Falha ao carregar posts:", err)
     });
@@ -35,5 +48,15 @@ export class Home implements OnInit{
       col = (col+1) % 4;
     }
     this.feed_columns.set(cols)
+  }
+
+  makeNewPost(post_text: string){
+    const post_data: PostCreationModel = {
+      text: post_text
+    }
+    this.postService.makeNewPost(post_data).subscribe({
+      next: (res) => this.fetchPosts(),
+      error: (err) => alert("Ops! Algo deu errado. Por favor tente novamente")
+    });
   }
 }

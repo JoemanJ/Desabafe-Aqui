@@ -24,6 +24,8 @@ export class AuthService {
   private httpClient = inject(HttpClient);
   private LoggedIn$ = new BehaviorSubject<boolean>(this.hasToken());
   isLoggedIn = this.LoggedIn$.asObservable();
+  private username$ = new BehaviorSubject<string|null>(this.getUsername());
+  username = this.username$.asObservable();
 
   login(credentials: LoginCredentials){
     return this.httpClient.post(this.LOGIN_URL, credentials);
@@ -33,6 +35,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('username');
+    this.username$.next(null);
     this.updateAuthState(false);
   }
 
@@ -46,5 +49,9 @@ export class AuthService {
 
   updateAuthState(status: boolean): void{
     this.LoggedIn$.next(status)
+  }
+
+  getUsername(): string | null {
+    return localStorage.getItem('username');
   }
 }
