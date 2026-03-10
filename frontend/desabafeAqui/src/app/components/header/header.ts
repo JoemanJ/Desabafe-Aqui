@@ -1,11 +1,11 @@
 import { Component, inject, input } from '@angular/core';
 import { LoginOrProfile } from './login-or-profile/login-or-profile';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [LoginOrProfile],
+  imports: [LoginOrProfile, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
