@@ -1,4 +1,4 @@
-<div class="post" (click)="debug()" [ngClass]="{ 'own': username()===currentUser,}">
+<div class="post" [ngClass]="{ 'own': username()===currentUser,}">
     <div class="mini-profile standart-font">
         <img [src]="user_profile_picture()">
         <h2 class="username">@{{username()}}</h2>
