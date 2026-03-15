@@ -31,11 +31,19 @@ class PostSerializer(serializers.ModelSerializer):
     username and profile picture.
     """
     author_details = UserProfileMiniSerializer(source='author.profile', read_only=True)
+    likes_count = serializers.IntegerField(source='likes.count', read_only=True)
+    is_liked = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
-        fields = ['author_details', 'text', 'slug', 'created_at']
-        read_only_fields = ['slug', 'created_at']        
+        fields = ['author_details', 'text', 'slug', 'created_at', 'likes_count', 'is_liked']
+        read_only_fields = ['slug', 'created_at', 'likes_count', 'is_liked']
+
+    def get_is_liked(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            return obj.likes.filter(id=user.id).exists()
+        return False
 
 class CommentSerializer(serializers.ModelSerializer):
     """

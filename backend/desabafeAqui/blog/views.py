@@ -1,4 +1,6 @@
 from rest_framework import viewsets, permissions, mixins
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from .models import (Post, 
                      Comment, 
                      UserProfile)
@@ -27,6 +29,20 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+    @action(detail=True, methods=['post'], permission_classes=[permissions.IsAuthenticated])
+    def like(self, request, slug=None):
+        post = self.get_object()
+        user = request.user
+
+        # Already gave a like, so remove it
+        if post.likes.filter(id=user.id).exists():
+            post.likes.remove(user)
+            return Response({'status':'unliked'})
+        else: # New like
+            post.likes.add(user)
+            return Response({'status': 'liked'})
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     """

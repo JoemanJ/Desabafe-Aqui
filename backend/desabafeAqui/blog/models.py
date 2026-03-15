@@ -67,6 +67,10 @@ class Post(models.Model):
     slug = models.SlugField(max_length=8, 
                             unique=True, 
                             blank=True)
+    
+    likes = models.ManyToManyField(User, 
+                                   related_name="liked_posts", 
+                                   blank=True)
 
     def __str__(self):
         end = '' if len(self.text) < 20 else '...'

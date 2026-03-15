@@ -15,6 +15,7 @@ class PostAPITest(APITestCase):
                                         text="Test post")
         self.list_url = reverse('post-list')
         self.detail_url = reverse('post-detail', kwargs={'slug': self.post.slug})
+        self.like_url = reverse('post-like', kwargs={'slug': self.post.slug})
 
     def test_get_posts_list_returns_OK(self):
         """
@@ -72,6 +73,63 @@ class PostAPITest(APITestCase):
         response = self.client.delete(self.detail_url)
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_anonymous_users_cant_like_posts(self):
+        """
+        Checks that a user that is not logged in (anonymous) can't like a post
+        """
+        response = self.client.post(self.like_url)
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_user_can_like_a_post(self):
+        """
+        Checks that a user can like a post through the API
+        """
+        self.client.force_authenticate(self.user)
+
+        response = self.client.post(self.like_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['status'], "liked")
+        self.post.refresh_from_db()
+        self.assertEqual(self.post.likes.count(), 1)
+
+    def test_user_can_unlike_a_previously_liked_post(self):
+        """
+        Checks that a user can unlike a post they have previously liked with a 
+        POST request to the like endpoint
+        """
+        self.client.force_authenticate(self.user)
+
+        self.client.post(self.like_url)
+        response = self.client.post(self.like_url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['status'], "unliked")
+        self.post.refresh_from_db()
+        self.assertEqual(self.post.likes.count(), 0)
+
+    def test_can_get_liked_count_from_post(self):
+        """
+        Checks that we can get the amount of likes a post has with a GET to the
+        Posts endpoint
+        """
+        response = self.client.get(self.detail_url)
+
+        self.assertContains(response, '"likes_count":0')
+
+    def test_can_get_check_if_current_user_has_liked_post(self):
+        """
+        Checks that we can know if the current user has liked the post with a 
+        GET call to the API
+        """
+        self.client.force_authenticate(self.user)
+
+        response = self.client.post(self.like_url)
+        response = self.client.get(self.detail_url)
+
+        self.assertContains(response, '"is_liked":true')
 
 class CommentAPITest(APITestCase):
     def setUp(self):
