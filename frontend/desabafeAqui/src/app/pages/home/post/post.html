@@ -3,10 +3,18 @@
         <img [src]="user_profile_picture()">
         <h2 class="username">@{{username()}}</h2>
     </div>
-    <p class="text standart-font">
-        {{text()}}
-    </p>
-    @if (isLoggedIn())
+    @if (!isEditing())
+    {
+        <p class="text standart-font">
+            {{text()}}
+        </p>
+    }
+    @else {
+        <textarea [(ngModel)]="text"
+        class="text standart-font edit-box"></textarea>
+    }
+
+    @if (isLoggedIn() && !isEditing())
     {
     <div class="post-buttons">
         <div class="b-left">
@@ -15,14 +23,25 @@
                 <span class="likes-count">{{likesCount()}}</span>
             </button>
         </div>
+
+        @if (isOwn())
+        {
         <div class="b-right">
-            <button>
+            <button (click)="toggleEdit()">
                 <span class="material-symbols-outlined">Edit</span>
             </button>
-            <button>
+            <button (click)="onDelete()">
                 <span class="material-symbols-outlined danger">Delete</span>
             </button>
         </div>
+        }
     </div>
+    }
+    @else 
+    {
+        <div class="edit-button-container">
+            <app-rounded-button (click)="saveEdit()" class="edit-save-button">salvar</app-rounded-button>
+            <app-rounded-button (click)="toggleEdit()" class="edit-cancel-button">cancelar</app-rounded-button>
+        </div>
     }
 </div>

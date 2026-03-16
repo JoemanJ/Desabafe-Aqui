@@ -19,6 +19,15 @@ export class PostService {
   }
 
   likePost(postSlug: string){
-    return this.httpClient.post(this.API_URL+`${postSlug}/like/`, '')
+    return this.httpClient.post(`${this.API_URL}${postSlug}/like/`, '');
+  }
+
+  editPost(postSlug: string, newText: string){
+    const body = {text: newText}
+    return this.httpClient.patch(`${this.API_URL}${postSlug}/`, body);
+  }
+
+  deletePost(postSlug: string){
+    return this.httpClient.delete(`${this.API_URL}${postSlug}/`);
   }
 }

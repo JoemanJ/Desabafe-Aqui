@@ -59,4 +59,8 @@ export class Home implements OnInit{
       error: (err) => alert("Ops! Algo deu errado. Por favor tente novamente")
     });
   }
+
+  onPostDeleted(){
+    
+  }
 }

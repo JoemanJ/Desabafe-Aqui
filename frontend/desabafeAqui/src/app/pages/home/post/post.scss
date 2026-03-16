@@ -14,12 +14,6 @@ $liked-color: #FF0000;
     max-height: 300px;
 }
 
-.own {
-    color: black;
-    background-color: colors.$theme_green;
-    border-radius: 0px 50px 50px 50px;
-}
-
 .mini-profile{
     display: flex;
     align-items: center;
@@ -39,6 +33,13 @@ img {
     font-size: 27px;
 }
 
+.edit-box {
+    background-color: transparent;
+    resize: none;
+    height: 999999px;
+    border: solid 1px black;
+}
+
 .post-buttons{
     display: flex;
     flex-direction: row;
@@ -52,6 +53,7 @@ button{
 }
 
 .material-symbols-outlined{
+    color: white;
     &:hover{
         filter: brightness(0.85);
         cursor: pointer;
@@ -61,6 +63,25 @@ button{
     }
 }
 
+
+.liked{
+    color: $liked-color;
+    font-variation-settings: 'FILL' 1;
+}
+
+.own {
+    button{
+        color: black;
+    }
+    .material-symbols-outlined{
+        color: black;
+    }
+    color: black;
+    background-color: colors.$theme_green;
+    border-radius: 0px 50px 50px 50px;
+}
+
+// TODO: Fix the stylesheet for "own" elements
 .danger{
     &:hover{
         color: $danger-icon-color;
@@ -70,7 +91,19 @@ button{
     }
 }
 
-.liked{
-    color: $liked-color;
-    font-variation-settings: 'FILL' 1;
+.edit-button-container{
+    display: flex;
+    justify-content: space-around;
+    
+    app-rounded-button{
+        margin: 0;
+    }
+
+    .edit-save-button{
+        background-color: colors.$theme_green_dark;
+    }
+
+    .edit-cancel-button{
+        background-color: red;
+    }
 }
