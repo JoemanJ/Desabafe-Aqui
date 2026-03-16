@@ -119,7 +119,7 @@ class PostAPITest(APITestCase):
 
         self.assertContains(response, '"likes_count":0')
 
-    def test_can_get_check_if_current_user_has_liked_post(self):
+    def test_can_check_if_current_user_has_liked_post(self):
         """
         Checks that we can know if the current user has liked the post with a 
         GET call to the API
@@ -130,6 +130,30 @@ class PostAPITest(APITestCase):
         response = self.client.get(self.detail_url)
 
         self.assertContains(response, '"is_liked":true')
+
+    def test_user_can_edit_their_own_post(self):
+        """
+        Checks that a user can edit the text of a post they made
+        """
+        self.client.force_authenticate(self.user)
+
+        new_text = 'Updated!'
+        response = self.client.patch(self.detail_url, {'text': new_text})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.post.refresh_from_db()
+        self.assertEqual(self.post.text, new_text)
+
+    def test_user_cannot_edit_someone_elses_post(self):
+        other_user = User.objects.create_user(username='hacker',
+                                              email='hack@er.com',
+                                              password="fsing4w5W$%¨sdgui")
+        self.client.force_authenticate(other_user)
+
+        new_text = 'Hacked!'
+        response = self.client.patch(self.detail_url, {'text': new_text})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.post.refresh_from_db()
+        self.assertNotEqual(self.post.text, new_text)
 
 class CommentAPITest(APITestCase):
     def setUp(self):
