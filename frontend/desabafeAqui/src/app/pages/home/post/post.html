@@ -1,4 +1,4 @@
-<div class="post" [ngClass]="{ 'own': username()===currentUser,}">
+<div class="post" [class.own]="isOwn()">
     <div class="mini-profile standart-font">
         <img [src]="user_profile_picture()">
         <h2 class="username">@{{username()}}</h2>
@@ -6,4 +6,23 @@
     <p class="text standart-font">
         {{text()}}
     </p>
+    @if (isLoggedIn())
+    {
+    <div class="post-buttons">
+        <div class="b-left">
+            <button (click)="onlike()">
+                <span class="material-symbols-outlined" [class.liked]="isLiked()">Favorite</span>
+                <span class="likes-count">{{likesCount()}}</span>
+            </button>
+        </div>
+        <div class="b-right">
+            <button>
+                <span class="material-symbols-outlined">Edit</span>
+            </button>
+            <button>
+                <span class="material-symbols-outlined danger">Delete</span>
+            </button>
+        </div>
+    </div>
+    }
 </div>

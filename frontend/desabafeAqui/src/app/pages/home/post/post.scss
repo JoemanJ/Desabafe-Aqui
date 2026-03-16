@@ -1,5 +1,8 @@
 @use "colors";
 
+$danger-icon-color: #FFAAAA;
+$liked-color: #FF0000;
+
 .post{
     display: flex;
     flex-direction: column;
@@ -28,11 +31,46 @@ img {
 }
 
 .text {
-    // border: 1px black solid;
     margin: 0px 0px 20px 0px;
     text-wrap-mode: wrap;
     word-wrap: break-word;
     width: 100%;
     overflow-y: scroll;
     font-size: 27px;
+}
+
+.post-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button{
+    background: none;
+    border: none;
+    color: white;
+}
+
+.material-symbols-outlined{
+    &:hover{
+        filter: brightness(0.85);
+        cursor: pointer;
+    }
+    &:active{
+        filter: brightness(0.80);
+    }
+}
+
+.danger{
+    &:hover{
+        color: $danger-icon-color;
+    }
+    &:active{
+        color: $danger-icon-color;
+    }
+}
+
+.liked{
+    color: $liked-color;
+    font-variation-settings: 'FILL' 1;
 }

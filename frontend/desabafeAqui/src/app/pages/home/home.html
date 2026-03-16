@@ -11,7 +11,6 @@
             <h3 class="post-greeting standart-font">É novo por aqui?</h3>
             <div class="post-text-container">
                 <h2 class="greeting-text standart-font">Crie uma conta e junte-se a várias outras pessoas que amam reclamar da vida!</h2>
-                <!-- <textarea class="post-text standart-font" placeholder="Escreva aqui..." #newPostText></textarea> -->
             </div>
         }
     </div>
@@ -23,7 +22,10 @@
             @for (post of col; track post.slug) {
                 <app-post [username]="post.author_details.username"
                 [user_profile_picture]="post.author_details.picture"
-                [text]="post.text"></app-post>
+                [slug]="post.slug"
+                [text]="post.text"
+                [likesCountInput]="post.likes_count"
+                [isLikedInput]="post.is_liked"></app-post>
         }
         </div>
     }

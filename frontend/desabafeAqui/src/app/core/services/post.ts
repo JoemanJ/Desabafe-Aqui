@@ -17,4 +17,8 @@ export class PostService {
   makeNewPost(post: PostCreationModel){
     return this.httpClient.post(this.API_URL, post);
   }
+
+  likePost(postSlug: string){
+    return this.httpClient.post(this.API_URL+`${postSlug}/like/`, '')
+  }
 }
