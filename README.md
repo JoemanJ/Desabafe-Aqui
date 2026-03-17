@@ -49,15 +49,17 @@ Funcionalidades implementadas até então (completude da lista depende da minha 
     - Componentes reativos (layouts diferentes para usuários logados)
     - Controle de acesso por redirecionamento
     - Página funcional de login e cadastro, com tratamento de erros
-    - Possibiliade de criar posts com atualização automática do feed
+    - Possibiliade de criar posts
+    - Possibilidade de edição e exclusão de posts pelo frontend
+    - Atualização automática do feed
+    - Possibilidade de dar e returar likes em posts
 - Algumas entidades de exemplo em um banco SQLite
 
 
 Funcionalidades planejadas:
 - Página de perfil de usuário
-- Possibilidade de edição e exclusão de posts pelo frontend
-- Possibilidade de dar "likes" em posts e comentários
 - Possibilidade de comentar em psots e outros comentários
+- Possibilidade de dar "likes" em comentários
 - Feed com scrolling infinito, mas renderizando apenas os posts visíveis
 - Possibilidade de posts com imagem
 - Funcionalidades de administrador 
@@ -200,15 +202,17 @@ Features implemented so far (completeness depends on my memory):
     -  Reactive components (different layouts for logged-in users).
     -  Access control via redirection.
     -  Functional Login and Sign-up pages with error handling.
-    -  Ability to create posts with automatic feed updates.
+    -  Ability to create posts
+    -  Ability to edit and delete posts through the frontend
+    -  Automatic feed update
+    -  Ability to like and unlike posts 
 - Example entities provided in a SQLite database.
 
 Planned features:
 
 - User profile pages.
-- Ability to edit and delete posts via the frontend.
-- Ability to "like" posts and comments.
 - Ability to comment on posts and other comments.
+- Ability to "like" comments.
 - Feed with infinite scrolling (rendering only visible posts).
 - Support for posts with images.
 - Admin functionalities.
