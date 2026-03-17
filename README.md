@@ -19,6 +19,7 @@ Até então o projeto incorpora:
 - Framework frontend (Angular)
 - Comunicação com base de dados (SQlite)
 - Autenticação de usuário (JWT)
+- Refresh automático de token JWT (silent refresh)
 - Operações CRUD
 - API REST
 - Modelo MVC
@@ -167,6 +168,7 @@ So far, the project incorporates:
 - Frontend Framework (Angular)
 - Database communication (SQLite)
 - User Authentication (JWT)
+- Automatic JWT token refresh (silent refresh)
 - CRUD Operations
 - REST API
 - MVC Pattern
