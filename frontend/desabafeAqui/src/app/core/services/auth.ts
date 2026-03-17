@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 
 interface RegisterCredentials {
     username: string;
@@ -29,6 +29,15 @@ export class AuthService {
 
   login(credentials: LoginCredentials){
     return this.httpClient.post(this.LOGIN_URL, credentials);
+  }
+
+  refreshToken() {
+    const refresh = localStorage.getItem("refresh_token");
+    return this.httpClient.post<{access: string}>(`${this.LOGIN_URL}refresh/`, {refresh}).pipe(
+      tap(response => {
+        localStorage.setItem("access_token", response.access)
+      })
+    )
   }
 
   logout(): void{

@@ -60,7 +60,8 @@ export class Home implements OnInit{
     });
   }
 
-  onPostDeleted(){
-    
+  onPostDeleted(deletedSlug: string){
+    this.posts = this.posts.filter(p => p.slug !== deletedSlug);
+    this.arrangePosts();
   }
 }

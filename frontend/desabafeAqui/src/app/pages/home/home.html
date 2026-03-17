@@ -25,6 +25,7 @@
                 [slug]="post.slug"
                 [textInput]="post.text"
                 [likesCountInput]="post.likes_count"
+                (deleted)="onPostDeleted($event)"
                 [isLikedInput]="post.is_liked"></app-post>
         }
         </div>

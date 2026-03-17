@@ -25,9 +25,10 @@ export class Post {
   isLiked = linkedSignal(() => this.isLikedInput());
 
   isLoggedIn = signal<boolean>(false);
-  deleted = output();
+  deleted = output<string>();
 
   isEditing = signal<boolean>(false);
+  isConfirmingDelete = signal<boolean>(false);
   
   currentUser: string | null = null;
   constructor(){
@@ -78,9 +79,16 @@ export class Post {
     })
   }
 
-  onDelete(): void {
+  toggleDelete(): void {
+    this.isConfirmingDelete.update((v)=>!v);
+  }
+
+  confirmDelete(): void {
     this.postService.deletePost(this.slug()).subscribe({
-      error: (err) => alert("Ops! Algo deu errado ao remover seu post! Por favor tente novamente!")
+      next: (response) => {
+        this.deleted.emit(this.slug());
+      },
+      error: (err) => alert("Ops! Algo deu errado ao apagar seu post! Por favor tente novamente!")
     })
   }
 }

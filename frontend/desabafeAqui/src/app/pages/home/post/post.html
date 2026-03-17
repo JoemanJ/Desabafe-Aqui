@@ -14,7 +14,7 @@
         class="text standart-font edit-box"></textarea>
     }
 
-    @if (isLoggedIn() && !isEditing())
+    @if (isLoggedIn() && !isEditing() && !isConfirmingDelete())
     {
     <div class="post-buttons">
         <div class="b-left">
@@ -30,18 +30,25 @@
             <button (click)="toggleEdit()">
                 <span class="material-symbols-outlined">Edit</span>
             </button>
-            <button (click)="onDelete()">
+            <button (click)="toggleDelete()">
                 <span class="material-symbols-outlined danger">Delete</span>
             </button>
         </div>
         }
     </div>
     }
-    @else 
+    @else if (isEditing())
     {
         <div class="edit-button-container">
             <app-rounded-button (click)="saveEdit()" class="edit-save-button">salvar</app-rounded-button>
             <app-rounded-button (click)="toggleEdit()" class="edit-cancel-button">cancelar</app-rounded-button>
+        </div>
+    }
+    @else if (isConfirmingDelete())
+    {
+        <div class="delete-button-container">
+            <app-rounded-button (click)="confirmDelete()" class="delete-confirm-button">apagar</app-rounded-button>
+            <app-rounded-button (click)="toggleDelete()" class="delete-cancel-button">cancelar</app-rounded-button>
         </div>
     }
 </div>

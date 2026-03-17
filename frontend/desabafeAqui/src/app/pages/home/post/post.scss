@@ -117,3 +117,24 @@ button{
         background-color: red;
     }
 }
+
+.delete-button-container{
+    display: flex;
+    justify-content: space-around;
+
+    app-rounded-button{
+        margin: 0;
+    }
+
+    .delete-confirm-button{
+        background-color: gray;
+        &:hover{
+            background-color: red;
+            color: white;
+        }
+    }
+
+    .delete-cancel-button{
+        
+    }
+}
