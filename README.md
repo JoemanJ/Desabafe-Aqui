@@ -9,6 +9,27 @@ O "Desabafe Aqui" é uma paródia de rede social onde usuários podem se registr
 
 O conceito é uma piada com o fato de pessoas de forma geral acharem divertido reclamar de coisas coletivamente, e o nome é um trocadilho com o site "Reclame Aqui".
 
+## Capturas de Tela (pra quem não tem tempo ou paciência para testar)
+![Página home com usuário deslogado](./screenshots/homepage_logged_out.png)
+Página home com usuário deslogado. Feed de postagens sem botões para interagir. Textos de postagens maiores podem ser "scrollados" para ver o texto inteiro.
+
+![página home com usuário logado](./screenshots/homepage_logged_in.png)
+Página home com usuário (divalala) logado. Postagens do usuário logado aparecem com formatação diferente e com botões para edição e exclusão. Usuários logados também podem faze novas postagens (que aparecem no feed na hora) e podem curtir postagens de outros usuários.
+
+![página de login/registro](./screenshots/login_register_page.png)
+página de login/registro (ela funciona).
+
+![página de login/registro com erros de usuários inválidos ou já existentes](./screenshots/login_register_page_invalid.png)
+>(servidor backend rodando)
+
+![página de login/registro com erros de backend](./screenshots/login_register_page_backend_error.png)
+> (servidor backend desligado)
+
+A página de login/registro reconhece erros diferentes e reage de acordo.
+
+![Confirmações de edição inline e exclusão de posts](./screenshots/update_delete.png)
+Confirmações de edição inline e exclusão de posts. 
+
 ## Que funcionalidades tem?
 Abaixo escrevi uma lista cheia de termos comuns e buzzwords que programadores amam elogiar ou mencionar o tempo todo, e que eu apliquei nesse projeto.
 
@@ -184,6 +205,27 @@ This is a project I created for study purposes and as a web development portfoli
 "Desabafe Aqui" is a social media parody where users can register to anonymously vent about inconvenient daily life stories through short texts, or comment on others' rants.
 
 The concept is a joke on the fact that people generally find it fun to complain about things collectively. The name itself is a pun on the famous Brazilian website "Reclame Aqui" (Complain Here).
+
+## Screenshots (For those with no time or patience to test)
+![Homepage for logged out users](./screenshots/homepage_logged_out.png)
+Home page for logged out users. No buttons to interact with posts. Texts of larger posts can be scrolled to see the entire post.
+
+![Homepage for logged in users](./screenshots/homepage_logged_in.png)
+Home page for logged in user (divalala). Logged in user's posts have a different color and buttons for edditing and deleting. Logged in users can also make new posts (that go on the feed immediately) and "like" other users' posts.
+
+![login/register page](./screenshots/login_register_page.png)
+login/register page (it works).
+
+![login/register page with invalid or existing username errors](./screenshots/login_register_page_invalid.png)
+> (backend server running)
+
+![login/register page with backend errors](./screenshots/login_register_page_backend_error.png)
+> (backend server not running)
+
+The login/register page reacts accordingly to different errors.
+
+![inline post editing and deletion confirmation](./screenshots/update_delete.png)
+Inline post editing and deletion confirmation.
 
 ## What features does it have?
 
