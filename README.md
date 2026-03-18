@@ -14,7 +14,7 @@ O conceito é uma piada com o fato de pessoas de forma geral acharem divertido r
 Página home com usuário deslogado. Feed de postagens sem botões para interagir. Textos de postagens maiores podem ser "scrollados" para ver o texto inteiro.
 
 ![página home com usuário logado](./screenshots/homepage_logged_in.png)
-Página home com usuário (divalala) logado. Postagens do usuário logado aparecem com formatação diferente e com botões para edição e exclusão. Usuários logados também podem faze novas postagens (que aparecem no feed na hora) e podem curtir postagens de outros usuários.
+Página home com usuário (divalala) logado. Postagens do usuário logado aparecem com formatação diferente e com botões para edição e exclusão. Usuários logados também podem fazer novas postagens (que aparecem no feed na hora) e podem curtir postagens de outros usuários.
 
 ![página de login/registro](./screenshots/login_register_page.png)
 página de login/registro (ela funciona).
@@ -28,6 +28,7 @@ página de login/registro (ela funciona).
 A página de login/registro reconhece erros diferentes e reage de acordo.
 
 ![Confirmações de edição inline e exclusão de posts](./screenshots/update_delete.png)
+
 Confirmações de edição inline e exclusão de posts. 
 
 ## Que funcionalidades tem?
@@ -225,6 +226,8 @@ login/register page (it works).
 The login/register page reacts accordingly to different errors.
 
 ![inline post editing and deletion confirmation](./screenshots/update_delete.png)
+
+
 Inline post editing and deletion confirmation.
 
 ## What features does it have?
