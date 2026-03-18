@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/desabafeAqui/db.sqlite3:/app/desabafeAqui/db.sqlite3
+      - ./backend/desabafeAqui/profile_pictures:/app/desabafeAqui/profile_pictures
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend

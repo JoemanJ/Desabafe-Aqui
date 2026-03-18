@@ -27,6 +27,7 @@ Até então o projeto incorpora:
 - Sanitização de entrada de usuário
 - Arquitetura desacoplada
 - Apresentação SPA (Single Page Application)
+- Aplicação dockerizada
 - Boas práticas de desenvolvimento
     - Modularização extensa
     - Estruturas de pastas padronizadas
@@ -66,6 +67,32 @@ Funcionalidades planejadas:
 - Tags para posts
 
 ## Como rodar localmente?
+
+### Opção 1: container docker (Fácil e rápido!)
+Pre-requisitos:
+- Docker
+- Docker Compose (Já vem instalado em versões mais novas do Docker)
+
+1. Navegue até a pasta raíz do projeto (a pasta com o arquivo docker-compose.yml)
+
+2. Rode o comando abaixo para construir e rodar os containers:
+```bash
+docker compose up --build
+```
+> Nota: Se você tiver uma versão antiga do docker e o comando não funcionar, use "docker-compose" invés de "docker compose"
+
+> Nota²: Você pode rodar sem a flag ```--build```, o que é mais rápido, mas não reconhece atualizações nos containers. Na dúvida, deixe a flag aí.
+
+3. Espere a construção do container... pode demorar um tempinho...
+
+4. Tudo pronto! Acesse http://127.0.0.1:2400/ para ver o site. \
+O servidor do backend estará disponível em: http://127.0.0.1:8000/ \
+A interface de admin do Django pode ser acessada em http://127.0.0.1:8000/admin. O login e a senha de admin do banco de dados de exemplos são ambos "admin". \
+Documentação da API pode ser vista em http://127.0.0.1:8000/docs/swagger ou http://127.0.0.1:8000/docs/redoc.
+
+### Opção 2: instalação local (Era a única opção antes de eu dockerizar)
+> Não tem muito motivo pra instalar localmente... o container docker é muito mais fácil, rápido e menos propenso a erro. Eu só deixo essa sessão no README pra mostrar a evolução da coisa.
+
 Pré-requisitos:
 
 - Django 6.0+
@@ -178,6 +205,7 @@ So far, the project incorporates:
 - User Input Sanitization
 - Decoupled Architecture
 - SPA (Single Page Application) Presentation
+- Dockerized application
 - Development Best Practices
     - Extensive modularization
     - Standardized folder structures
@@ -219,6 +247,31 @@ Planned features:
 - Post tags.
 
 ## How to run locally?
+
+### Option 1: docker container (Quick and easy!)
+Prerequisites:
+- Docker
+- Docker Compose (already comes with newer versions of Docker)
+
+1. Navigate to the project's root directory (where the docker-compose.yml file is)
+
+2. Run the following command to build and run the containers:
+```bash
+docker compose up --build
+```
+> Note: If you have an older version of docker and the command doesn't work, use "docker-compose" instead of "docker compose"
+
+> Note²: You can skip the ```--build``` flag, which is faster, but doesn't account for container updates. If in doubt, run with the flag.
+
+3. Wait for the container to build... this can take a while...
+
+4. All done! Access http://127.0.0.1:2400/ to see the site. \
+The backend server will be available at: http://127.0.0.1:8000/\
+The Django admin interface can be accessed at http://127.0.0.1:8000/admin. Both the login and password for the example database are "admin".\
+API documentation can be viewed at http://127.0.0.1:8000/docs/swagger or http://127.0.0.1:8000/docs/redoc.
+
+### Option 2: local instalation (Was the only option before i dockerised this)
+> There really is no reason to install locally... the docker container is way easier, faster and less prone to error. I just leave this section of the README to show how things evolved.
 
 Prerequisites:
 
